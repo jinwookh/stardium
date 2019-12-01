@@ -1,14 +1,17 @@
 package com.bb.stardium.bench.domain;
 
 import com.bb.stardium.bench.dto.Address;
+import com.bb.stardium.bench.dto.RoomRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder @Getter
 public class Room {
@@ -30,4 +33,12 @@ public class Room {
 
     private int playersLimit;
 
+    public void update(RoomRequestDto roomRequestDto) {
+        this.title = roomRequestDto.getTitle();
+        this.intro = roomRequestDto.getIntro();
+        this.address = roomRequestDto.getAddress();
+        this.startTime = roomRequestDto.getStartTime();
+        this.endTime = roomRequestDto.getEndTime();
+        this.playersLimit = roomRequestDto.getPlayersLimit();
+    }
 }
