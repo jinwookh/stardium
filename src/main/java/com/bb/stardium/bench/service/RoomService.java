@@ -1,10 +1,36 @@
 package com.bb.stardium.bench.service;
 
+import com.bb.stardium.bench.domain.Room;
+import com.bb.stardium.bench.domain.repository.RoomRepository;
 import com.bb.stardium.bench.dto.RoomRequestDto;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class RoomService {
-    public void create(RoomRequestDto roomRequest) {
+
+    private RoomRepository roomRepository;
+
+    public RoomService(RoomRepository roomRepository) {
+        this.roomRepository = roomRepository;
+    }
+
+    @Transactional
+    public Long create(RoomRequestDto roomRequest) {
+        Room room = toRoomEntity(roomRequest);
+        Room saveRoom = roomRepository.save(room);
+        return saveRoom.getId();
+    }
+
+    private Room toRoomEntity(RoomRequestDto roomRequest) {
+        return Room.builder()
+                .title(roomRequest.getTitle())
+                .intro(roomRequest.getIntro())
+                .address(roomRequest.getAddress())
+                .startTime(roomRequest.getStartTime())
+                .endTime(roomRequest.getEndTime())
+                .playersLimit(roomRequest.getPlayersLimit())
+                .build();
     }
 }

@@ -3,10 +3,12 @@ package com.bb.stardium.bench.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 
 @AllArgsConstructor
 @Getter
+@Embeddable
 public class Address {
     @NotBlank
     private String city;
