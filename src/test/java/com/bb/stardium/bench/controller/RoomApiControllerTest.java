@@ -1,4 +1,4 @@
-package com.bb.stardium;
+package com.bb.stardium.bench.controller;
 
 import com.bb.stardium.bench.dto.Address;
 import com.bb.stardium.bench.dto.RoomRequestDto;
