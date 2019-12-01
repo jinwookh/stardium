@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+<!-- Semantic UI CDN으로 받음. 수정 필요 -->
+<!--<link rel="stylesheet" href="/semantic.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+<style>
+    .chat-room {
+        min-height: 300px;
+        min-width: 100%;
+        border : 1px solid #00b5ad;
+        border-radius: 30px;
+        margin: 10px;
+    }
+    .action.input {
+        width: 100%;
+    }
+    .out-btn {
+        margin: 10px;
+    }
+</style>
+<body>
+    <h1>[제목] 제목이 오는 곳입니다!!</h1>
+    <div class="chat-room">
+    </div>
+    <br>
+    <div class="ui action input">
+        <input type="text" placeholder="내용을 입력하세요">
+        <button class="ui button">입력</button>
+    </div>
+    <h2>방 소개</h2>
+    <div>
+        방 소개 컨텐츠가 오는 곳임
+    </div>
+    <div>장소 : 루터회관</div>
+    <div>일시 : 2019-11-30</div>
+    <div>시간 : 10:00 ~ 12:00</div>
+    <br>
+    <h2>Member</h2>
+    <div class="ui link cards">
+        <div class="card">
+            <div class="image">
+                <img src="/images/ybh.png" alt="player-profile">
+            </div>
+            <div class="content">
+                <div class="header">닉네임</div>
+                <div class="description">
+                    안녕하세요! 산곡동에서 강백호를 맡고 있는 무늘보라고 합니다! 주로 센터를 보지만 포워드도 괜찮습니다
+                </div>
+            </div>
+            <div class="extra content">
+                <span class="right floated">
+                    Latest played in 2019.11
+                </span>
+                <span>
+                    <i class="basketball ball icon"></i>
+                    75 plays
+                </span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button class="fluid ui red button out-btn">나가기</button>
+</body>
+</html>
