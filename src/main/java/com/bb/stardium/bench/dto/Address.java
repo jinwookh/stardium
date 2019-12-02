@@ -2,10 +2,12 @@ package com.bb.stardium.bench.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Embeddable

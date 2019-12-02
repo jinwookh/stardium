@@ -89,4 +89,17 @@ class RoomServiceTest {
         verify(roomRepository).delete(any());
     }
 
+    @DisplayName("find method 성공")
+    @Test
+    public void findRoom() throws Exception {
+        // given
+        given(roomRepository.findById(any())).willReturn(Optional.ofNullable(room));
+
+        // when
+        roomService.findRoom(room.getId());
+
+        // then
+        verify(roomRepository).findById(any());
+    }
+
 }

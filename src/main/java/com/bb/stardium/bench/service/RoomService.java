@@ -41,4 +41,9 @@ public class RoomService {
                 .playersLimit(roomRequest.getPlayersLimit())
                 .build();
     }
+
+    public Room findRoom(Long roomId) {
+        return roomRepository.findById(roomId)
+                .orElseThrow(NotFoundRoomException::new);
+    }
 }

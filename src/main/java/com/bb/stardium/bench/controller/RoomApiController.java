@@ -1,5 +1,6 @@
 package com.bb.stardium.bench.controller;
 
+import com.bb.stardium.bench.domain.Room;
 import com.bb.stardium.bench.dto.RoomRequestDto;
 import com.bb.stardium.bench.service.RoomService;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,15 @@ public class RoomApiController {
         return ResponseEntity.ok().body(updatedRoomId);
     }
 
-    @DeleteMapping("rooms/{roomId}")
+    @DeleteMapping("/rooms/{roomId}")
     public ResponseEntity delete(@PathVariable Long roomId) {
         roomService.delete(roomId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/rooms/{roomId}")
+    public ResponseEntity get(@PathVariable Long roomId) {
+        Room room = roomService.findRoom(roomId);
+        return ResponseEntity.ok(room);
     }
 }
