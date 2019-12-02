@@ -38,6 +38,11 @@ public class RoomService {
         roomRepository.delete(room);
     }
 
+    public Room findRoom(Long roomId) {
+        return roomRepository.findById(roomId)
+                .orElseThrow(NotFoundRoomException::new);
+    }
+
     private Room toRoomEntity(RoomRequestDto roomRequest) {
         return Room.builder()
                 .title(roomRequest.getTitle())
@@ -47,10 +52,5 @@ public class RoomService {
                 .endTime(roomRequest.getEndTime())
                 .playersLimit(roomRequest.getPlayersLimit())
                 .build();
-    }
-
-    public Room findRoom(Long roomId) {
-        return roomRepository.findById(roomId)
-                .orElseThrow(NotFoundRoomException::new);
     }
 }
