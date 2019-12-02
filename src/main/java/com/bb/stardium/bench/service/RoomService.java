@@ -31,6 +31,13 @@ public class RoomService {
         return room.getId();
     }
 
+    @Transactional
+    public void delete(Long roomId) {
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(NotFoundRoomException::new);
+        roomRepository.delete(room);
+    }
+
     private Room toRoomEntity(RoomRequestDto roomRequest) {
         return Room.builder()
                 .title(roomRequest.getTitle())
