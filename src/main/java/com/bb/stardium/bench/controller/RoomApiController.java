@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/rooms")
 public class RoomApiController {
 
     private final RoomService roomService;
@@ -15,25 +16,25 @@ public class RoomApiController {
         this.roomService = roomService;
     }
 
-    @PostMapping("/rooms")
-    public ResponseEntity crate(RoomRequestDto roomRequest) {
+    @PostMapping()
+    public ResponseEntity crate(@RequestBody RoomRequestDto roomRequest) {
         Long roomNumber = roomService.create(roomRequest);
         return ResponseEntity.ok().body(roomNumber);
     }
 
-    @PutMapping("/rooms/{roomId}")
-    public ResponseEntity update(@PathVariable Long roomId, RoomRequestDto roomRequestDto) {
+    @PutMapping("/{roomId}")
+    public ResponseEntity update(@PathVariable Long roomId,@RequestBody RoomRequestDto roomRequestDto) {
         Long updatedRoomId = roomService.update(roomId, roomRequestDto);
         return ResponseEntity.ok().body(updatedRoomId);
     }
 
-    @DeleteMapping("/rooms/{roomId}")
+    @DeleteMapping("/{roomId}")
     public ResponseEntity delete(@PathVariable Long roomId) {
         roomService.delete(roomId);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/rooms/{roomId}")
+    @GetMapping("/{roomId}")
     public ResponseEntity get(@PathVariable Long roomId) {
         Room room = roomService.findRoom(roomId);
         return ResponseEntity.ok(room);
