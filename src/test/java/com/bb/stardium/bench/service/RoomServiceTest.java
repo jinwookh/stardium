@@ -19,6 +19,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()
@@ -51,10 +52,10 @@ class RoomServiceTest {
         given(roomRepository.save(any())).willReturn(room);
 
         // when
-        Long roomNumber = roomService.create(roomRequest);
+        roomService.create(roomRequest);
 
         // then
-        assertThat(roomNumber).isEqualTo(1L);
+        verify(roomRepository).save(any());
     }
 
     @DisplayName("update method 성공")
@@ -73,6 +74,19 @@ class RoomServiceTest {
         assertThat(updatedRoom.getTitle()).isEqualTo(updateRequest.getTitle());
         assertThat(updatedRoom.getIntro()).isEqualTo(updateRequest.getIntro());
         assertThat(updatedRoom.getPlayersLimit()).isEqualTo(updateRequest.getPlayersLimit());
+    }
+
+    @DisplayName("delete method 성공")
+    @Test
+    public void deleteRoom() throws Exception {
+        // given
+        given(roomRepository.findById(any())).willReturn(Optional.ofNullable(room));
+
+        // when
+        roomService.delete(room.getId());
+
+        // then
+        verify(roomRepository).delete(any());
     }
 
 }

@@ -52,6 +52,22 @@ public class RoomApiControllerTest {
                 .isOk();
     }
 
+    @DisplayName("방 삭제 성공 테스트")
+    @Test
+    void deleteRoomTest() {
+        Address address = new Address("서울시", "송파구", "루터회관 앞");
+        LocalDateTime startTime = LocalDateTime.of(2020, 11, 30, 10, 0);
+        LocalDateTime endTime = LocalDateTime.of(2020, 11, 30, 13, 0);
+        RoomRequestDto roomRequest = new RoomRequestDto("title", "intro", address, startTime, endTime, 10);
+
+        createRoom(roomRequest);
+
+        webTestClient.delete().uri("/rooms/1")
+                .exchange()
+                .expectStatus()
+                .isOk();
+    }
+
     private void createRoom(RoomRequestDto roomRequest) {
         webTestClient.post().uri("/rooms")
                 .body(Mono.just(roomRequest), RoomRequestDto.class)
