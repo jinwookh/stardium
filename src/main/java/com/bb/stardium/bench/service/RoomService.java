@@ -23,6 +23,14 @@ public class RoomService {
         return saveRoom.getId();
     }
 
+    @Transactional
+    public Long update(Long roomId, RoomRequestDto roomRequestDto) {
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(NotFoundRoomException::new);
+        room.update(roomRequestDto);
+        return room.getId();
+    }
+
     private Room toRoomEntity(RoomRequestDto roomRequest) {
         return Room.builder()
                 .title(roomRequest.getTitle())
