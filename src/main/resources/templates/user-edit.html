@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="fragment/head :: headFragment"/>
-    <link href="/css/user-edit.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/user-edit.css">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <form>
             <div class="ui form">
                 <div class="field">
-                    <img alt="profile_img" class="ui image user_profile" src="../images/default_profile_img.png"/>
+                    <img class="ui image user_profile" src="../images/default_profile_img.png" alt="profile_img"/>
                 </div>
                 <div class="field">
                     <div class="ui violet small submit button">사진 수정</div>
@@ -21,23 +21,23 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input name="email" placeholder="닉네임 입력" type="text"/>
+                        <input type="text" name="email" placeholder="닉네임 입력"/>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input name="password" placeholder="비밀번호 입력" type="password">
+                        <input type="password" name="password" placeholder="비밀번호 입력">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input name="confirmPassword" placeholder="비밀번호 재입력" type="password">
+                        <input type="password" name="confirmPassword" placeholder="비밀번호 재입력">
                     </div>
                 </div>
                 <div class="field">
-                    <textarea name="statusMessage" placeholder="상태 메세지" type="password"></textarea>
+                    <textarea type="password" name="statusMessage" placeholder="상태 메세지"></textarea>
                 </div>
                 <div class="field">
                     <div class="ui fluid violet large submit button">수정 완료</div>
