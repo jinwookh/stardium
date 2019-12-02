@@ -2,7 +2,6 @@ package com.bb.stardium.bench.controller;
 
 import com.bb.stardium.bench.dto.Address;
 import com.bb.stardium.bench.dto.RoomRequestDto;
-import com.bb.stardium.bench.dto.RoomUpdateRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class RoomApiControllerTest {
 
     @DisplayName("방 만들기 성공 테스트")
     @Test
-    void createRoom() {
+    void createRoomTest() {
         Address address = new Address("서울시", "송파구", "루터회관 앞");
         LocalDateTime startTime = LocalDateTime.of(2020, 11, 30, 10, 0);
         LocalDateTime endTime = LocalDateTime.of(2020, 11, 30, 13, 0);
@@ -42,12 +41,12 @@ public class RoomApiControllerTest {
         LocalDateTime startTime = LocalDateTime.of(2020, 11, 30, 10, 0);
         LocalDateTime endTime = LocalDateTime.of(2020, 11, 30, 13, 0);
         RoomRequestDto originRequest = new RoomRequestDto("title", "intro", address, startTime, endTime, 10);
-        RoomUpdateRequestDto updateRequest = new RoomUpdateRequestDto(1L, "updatedTitle", "updatedIntro", address, startTime, endTime, 5);
+        RoomRequestDto updateRequest = new RoomRequestDto("updatedTitle", "updatedIntro", address, startTime, endTime, 5);
 
         createRoom(originRequest);
 
         webTestClient.put().uri("/rooms/1")
-                .body(Mono.just(updateRequest), RoomUpdateRequestDto.class)
+                .body(Mono.just(updateRequest), RoomRequestDto.class)
                 .exchange()
                 .expectStatus()
                 .isOk();
