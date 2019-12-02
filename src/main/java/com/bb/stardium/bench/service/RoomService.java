@@ -3,6 +3,7 @@ package com.bb.stardium.bench.service;
 import com.bb.stardium.bench.domain.Room;
 import com.bb.stardium.bench.domain.repository.RoomRepository;
 import com.bb.stardium.bench.dto.RoomRequestDto;
+import com.bb.stardium.bench.service.exception.NotFoundRoomException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
