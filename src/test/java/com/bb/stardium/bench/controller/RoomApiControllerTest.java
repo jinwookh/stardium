@@ -72,12 +72,16 @@ public class RoomApiControllerTest {
     @Test
     void readRoomTest() {
         createRoom(roomRequest);
-        Room room = toRoomEntity(roomRequest);
 
         webTestClient.get().uri("/rooms/1")
                 .exchange()
                 .expectStatus()
-                .isOk();
+                .isOk()
+                .expectBody()
+                .jsonPath("$.playersLimit")
+                .isEqualTo(roomRequest.getPlayersLimit())
+                .jsonPath("$.address.city")
+                .isEqualTo(roomRequest.getAddress().getCity());
     }
 
     private Room toRoomEntity(RoomRequestDto roomRequest) {
