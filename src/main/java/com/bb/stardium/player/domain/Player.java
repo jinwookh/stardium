@@ -73,9 +73,8 @@ public class Player {
         return this.password.equals(password);
     }
 
-    public Room addRoom(Room room) {
+    public void addRoom(Room room) {
         rooms.add(room);
-        return room;
     }
 
     public Room removeRoom(Room room) {

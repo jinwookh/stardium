@@ -40,15 +40,15 @@ public class Room {
 
     private int playersLimit;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
     private Player master;
 
     @ManyToMany
     @JoinTable(name = "player_room",
-            joinColumns = @JoinColumn(name = "player_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id"))
-    private List<Player> players = new ArrayList<>();
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id"))
+    private List<Player> players = new ArrayList<Player>();
 
     public void update(Room updatedRoom) {
         this.title = updatedRoom.getTitle();
@@ -59,9 +59,13 @@ public class Room {
         this.playersLimit = updatedRoom.getPlayersLimit();
     }
 
-    public Player addPlayer(Player player) {
-        players.add(player);
-        return player;
+    public boolean isNotMaster(Player masterPlayer) {
+        return this.master != masterPlayer;
+    }
+
+    public void addPlayer(Player player) {
+        this.players.add(player);
+        player.addRoom(this);
     }
 
     public boolean hasPlayer(Player player) {
