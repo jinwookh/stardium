@@ -21,6 +21,7 @@ public class RoomControllerTest {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private RoomRequestDto roomRequest;
+
     @Autowired
     private WebTestClient webTestClient;
 
@@ -76,6 +77,18 @@ public class RoomControllerTest {
                 .expectStatus()
                 .isOk();
     }
+
+    @DisplayName("전체 방 조회 성공 테스트")
+    @Test
+    public void findAllRooms() throws Exception {
+        createRoom(roomRequest);
+
+        webTestClient.get().uri("/rooms")
+                .exchange()
+                .expectStatus()
+                .isOk();
+    }
+
 
     // TODO : 리팩토링 필요
     private Long createRoom(RoomRequestDto roomRequest) {
