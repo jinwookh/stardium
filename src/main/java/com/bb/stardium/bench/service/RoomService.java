@@ -10,7 +10,9 @@ import com.bb.stardium.player.service.PlayerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,5 +105,29 @@ public class RoomService {
 
         room.removePlayer(player);
         return player.removeRoom(room);
+    }
+
+    private boolean isUnexpiredRoom(Room room) {
+        return room.getStartTime().isAfter(LocalDateTime.now());
+    }
+
+    private boolean hasRemainingSeat(Room room) {
+        return (room.getPlayersLimit() - room.getPlayers().size()) > 0;
+    }
+
+    public List<RoomResponseDto> findAllUnexpiredRooms() {
+        return roomRepository.findAll().stream()
+                .filter(this::isUnexpiredRoom)
+                .filter(this::hasRemainingSeat)
+                .sorted(Comparator.comparing(Room::getStartTime)) // TODO: 추후 추출? 혹은 쿼리 등 다른 방법?
+                .map(this::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<RoomResponseDto> findPlayerJoinedRoom(Player player) {
+        return roomRepository.findByPlayers_Email(player.getEmail()).stream()
+                .sorted(Comparator.comparing(Room::getStartTime))
+                .map(this::toResponseDto)
+                .collect(Collectors.toList());
     }
 }

@@ -1,10 +1,11 @@
 package com.bb.stardium.bench.web.controller;
 
 import com.bb.stardium.bench.domain.Room;
-import com.bb.stardium.bench.dto.RoomRequestDto;
 import com.bb.stardium.bench.dto.RoomResponseDto;
+import com.bb.stardium.bench.dto.RoomRequestDto;
 import com.bb.stardium.bench.service.RoomService;
 import com.bb.stardium.player.dto.PlayerResponseDto;
+import com.bb.stardium.player.service.PlayerService;
 import com.bb.stardium.player.service.exception.AuthenticationFailException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,15 +19,17 @@ import java.util.List;
 @RequestMapping("/rooms")
 public class RoomController {
 
+    private PlayerService playerService;
     private RoomService roomService;
 
-    public RoomController(RoomService roomService) {
+    public RoomController(RoomService roomService, PlayerService playerService) {
         this.roomService = roomService;
+        this.playerService = playerService;
     }
 
     @GetMapping
     public String mainRoomList(Model model) {
-        List<RoomResponseDto> rooms = roomService.findAllRooms();
+        List<RoomResponseDto> rooms = roomService.findAllUnexpiredRooms();
         model.addAttribute("rooms", rooms);
         return "main_my_room";
     }

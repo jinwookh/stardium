@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -39,14 +40,14 @@ public class Room {
 
     private int playersLimit;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "master_id")
     private Player master;
 
     @ManyToMany
     @JoinTable(name = "player_room",
-            joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "player_id"))
+            joinColumns = @JoinColumn(name = "player_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id"))
     private List<Player> players = new ArrayList<>();
 
     public void update(Room updatedRoom) {

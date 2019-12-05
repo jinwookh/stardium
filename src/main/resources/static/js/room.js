@@ -49,7 +49,7 @@ const ROOM_APP = (() => {
         const detail = document.getElementById('detail');
         const startTime = document.getElementById('startTime');
         const endTime = document.getElementById('endTime');
-        const playerNumbers = document.getElementById('playerNumbers');
+        const playersLimit = document.getElementById('playersLimit');
         const intro = document.getElementById('intro');
 
 
@@ -65,7 +65,7 @@ const ROOM_APP = (() => {
                 },
                 startTime: startTime.value,
                 endTime: endTime.value,
-                playerNumbers: playerNumbers.value,
+                playersLimit: playersLimit.value,
                 intro: intro.value
             };
 
@@ -95,7 +95,7 @@ const ROOM_APP = (() => {
                 },
                 startTime: startTime.value,
                 endTime: endTime.value,
-                playerNumbers: playerNumbers.value,
+                playersLimit: playersLimit.value,
                 intro: intro.value
             };
 
