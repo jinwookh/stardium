@@ -9,11 +9,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
-@Disabled
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class RoomTest extends BaseAcceptanceTest {
     private RoomRequestDto roomRequestDto;
     private Player masterPlayer1;
@@ -23,7 +24,7 @@ class RoomTest extends BaseAcceptanceTest {
         masterPlayer1 = new Player("master1", "master1@mail.net", "password");
         roomRequestDto = new RoomRequestDto("title", "intro",
                 new Address("서울시", "송파구", "루터회관"),
-                LocalDateTime.now(), LocalDateTime.now().plusHours(1L), 3, masterPlayer1);
+                LocalDateTime.now().plusHours(2L), LocalDateTime.now().plusHours(3L), 3, masterPlayer1);
     }
 
     @Test
@@ -39,7 +40,6 @@ class RoomTest extends BaseAcceptanceTest {
                 .expectBody(Long.class)
                 .returnResult()
                 .getResponseBody();
-
 
         PlayerRequestDto joinPlayer = new PlayerRequestDto("join", "join@room.com", "A!1bcdefg", "dd");
         newSessionPost(joinPlayer, "rooms/join/" + roomNumber)
