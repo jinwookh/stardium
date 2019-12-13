@@ -20,7 +20,7 @@ public abstract class BaseAcceptanceTest {
     protected BaseAcceptanceTest() {
     }
 
-    private Player createPlayer(PlayerRequestDto playerRequestDto) {
+    protected Player createPlayer(PlayerRequestDto playerRequestDto) {
         webTestClient.post().uri("/player/new")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters

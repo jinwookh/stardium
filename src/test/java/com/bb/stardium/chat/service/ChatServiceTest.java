@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest(classes = ChatService.class)
@@ -34,7 +34,8 @@ class ChatServiceTest {
     @Autowired
     ChatService chatService;
 
-    ChatMessage chatMessage = mock(ChatMessage.class);
+    ChatMessage testChatMessage = new ChatMessage(1L, 1L, 1L,
+            "test", "test", OffsetDateTime.now());
 
     @Test
     @DisplayName("채팅 저장")
@@ -42,7 +43,7 @@ class ChatServiceTest {
         ChatMessageRequestDto chatMessageRequestDto =
                 new ChatMessageRequestDto(ROOM_ID, PLAYER_ID, CONTENTS);
 
-        given(chatMessageRepository.save(any())).willReturn(chatMessage);
+        given(chatMessageRepository.save(any())).willReturn(testChatMessage);
         given(playerService.findNicknameByPlayerId(anyLong())).willReturn(any());
 
         chatService.saveMessage(chatMessageRequestDto);
@@ -53,7 +54,7 @@ class ChatServiceTest {
     @Test
     @DisplayName("예전 채팅 기록 반환")
     void previous_chat() {
-        given(chatMessageRepository.findAllByRoomIdOrderByTimestamp(ROOM_ID)).willReturn(List.of(chatMessage));
+        given(chatMessageRepository.findAllByRoomIdOrderByTimestamp(ROOM_ID)).willReturn(List.of(testChatMessage));
         chatService.getPreviousChatMessages(ROOM_ID);
 
         verify(chatMessageRepository).findAllByRoomIdOrderByTimestamp(ROOM_ID);
