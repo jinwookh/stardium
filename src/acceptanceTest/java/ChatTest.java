@@ -4,8 +4,6 @@ import com.bb.stardium.player.dto.PlayerRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -42,7 +40,6 @@ public class ChatTest extends BaseAcceptanceTest {
 
     @LocalServerPort
     int port;
-    private static final Logger log = LoggerFactory.getLogger(ChatTest.class);
 
     private WebSocketStompClient webSocketStompClient;
     private String socketConnectUrl;
