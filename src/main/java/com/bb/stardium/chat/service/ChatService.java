@@ -35,7 +35,6 @@ public class ChatService {
     }
 
     private ChatMessage getMessageWithAdditionalInfo(final ChatMessageRequestDto chatMessageRequestDto) {
-        // TODO: 데이터 sanitize
         final String nickname = playerService.findNicknameByPlayerId(chatMessageRequestDto.getPlayerId());
         final OffsetDateTime now = OffsetDateTime.now();
 
