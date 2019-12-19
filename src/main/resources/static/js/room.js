@@ -70,14 +70,20 @@ const ROOM_APP = (() => {
         let roomId = document.getElementById('room-id');
         roomId = roomId ? roomId.value : 0;
 
+        const roomBasicInfoItemTitles = ['title', 'city', 'section', 'detail', 'gameDate', 'startTime'
+            , 'endTime', 'playersLimit', 'intro'];
+
+
         const title = document.getElementById('title');
         const city = document.getElementById('city');
         const section = document.getElementById('section');
         const detail = document.getElementById('detail');
+        const gameDate = document.getElementById('gameDate');
         const startTime = document.getElementById('startTime');
         const endTime = document.getElementById('endTime');
         const playersLimit = document.getElementById('playersLimit');
         const intro = document.getElementById('intro');
+
 
         const saveRoom = event => {
 
@@ -96,8 +102,8 @@ const ROOM_APP = (() => {
                     section: section.value,
                     detail: detail.value,
                 },
-                startTime: startTime.value,
-                endTime: endTime.value,
+                startTime: gameDate.value + " " + startTime.value,
+                endTime: gameDate.value + " " + endTime.value,
                 playersLimit: playersLimit.value,
                 intro: intro.value,
             };
