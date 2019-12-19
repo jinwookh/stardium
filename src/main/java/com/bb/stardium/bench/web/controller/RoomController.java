@@ -45,8 +45,12 @@ public class RoomController {
     }
 
     @GetMapping("/{roomId}")
-    public String get(@PathVariable Long roomId, Model model) {
+    public String get(@PathVariable Long roomId, Model model, final Player loggedInPlayer) {
         Room room = roomService.findRoom(roomId);
+
+        if (!room.hasPlayer(loggedInPlayer)) {
+            return "redirect:/";
+        }
 
         model.addAttribute("room", room);
         return "room";
