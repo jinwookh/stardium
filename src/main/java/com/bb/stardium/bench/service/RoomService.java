@@ -39,7 +39,7 @@ public class RoomService {
         return room.getId();
     }
 
-    public void checkRoomMaster(Player player, Room room) {
+    private void checkRoomMaster(Player player, Room room) {
         if (room.isNotMaster(player)) {
             throw new MasterAndRoomNotMatchedException();
         }

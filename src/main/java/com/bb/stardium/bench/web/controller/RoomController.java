@@ -3,7 +3,6 @@ package com.bb.stardium.bench.web.controller;
 import com.bb.stardium.bench.domain.Room;
 import com.bb.stardium.bench.dto.RoomResponseDto;
 import com.bb.stardium.bench.service.RoomService;
-import com.bb.stardium.bench.service.exception.MasterAndRoomNotMatchedException;
 import com.bb.stardium.player.domain.Player;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,9 +36,7 @@ public class RoomController {
     public String updateRoom(@PathVariable Long roomId, Model model, final Player loggedInPlayer) {
         Room room = roomService.findRoom(roomId);
 
-        try {
-            roomService.checkRoomMaster(loggedInPlayer, room);
-        } catch (MasterAndRoomNotMatchedException e) {
+        if (room.isNotMaster(loggedInPlayer)) {
             return "redirect:/";
         }
 
@@ -50,6 +47,7 @@ public class RoomController {
     @GetMapping("/{roomId}")
     public String get(@PathVariable Long roomId, Model model) {
         Room room = roomService.findRoom(roomId);
+
         model.addAttribute("room", room);
         return "room";
     }
