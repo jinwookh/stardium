@@ -3,7 +3,9 @@ import com.bb.stardium.bench.dto.RoomRequestDto;
 import com.bb.stardium.chat.dto.ChatMessageRequestDto;
 import com.bb.stardium.player.domain.Player;
 import com.bb.stardium.player.dto.PlayerRequestDto;
-import dto.TestChatResponseDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -124,7 +126,7 @@ public class ChatTest extends BaseAcceptanceTest {
         return new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
-                return TestChatResponseDto.class;
+                return ChatTest.TestChatResponseDto.class;
             }
 
             @Override
@@ -134,4 +136,14 @@ public class ChatTest extends BaseAcceptanceTest {
         };
     }
 
+    @NoArgsConstructor
+    @Getter
+    static private class TestChatResponseDto {
+        private Long roomId;
+        private String nickname;
+
+        @JsonProperty("message")
+        private String contents;
+        private String timestamp;
+    }
 }
