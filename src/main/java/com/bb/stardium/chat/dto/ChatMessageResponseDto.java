@@ -1,6 +1,7 @@
 package com.bb.stardium.chat.dto;
 
 import com.bb.stardium.chat.domain.ChatMessage;
+import com.bb.stardium.common.util.EscapedCharacters;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
@@ -24,8 +25,8 @@ public class ChatMessageResponseDto {
 
     public ChatMessageResponseDto(final ChatMessage message) {
         this.roomId = message.getRoomId();
-        this.nickname = message.getPlayerNickname();
-        this.message = message.getContents();
+        this.nickname = EscapedCharacters.of(message.getPlayerNickname());
+        this.message = EscapedCharacters.of(message.getContents());
         this.timestamp = message.getTimestamp();
     }
 }

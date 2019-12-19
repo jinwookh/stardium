@@ -172,13 +172,11 @@ const ROOM_APP = (() => {
             }
         };
 
-        const quitRoom = (event) => {
+        const quitRoom = () => {
 
-            const ifSucceed = (response) => {
-                response.json().then(data => {
+            const ifSucceed = () => {
                     alert("나가는 데 성공했습니다!");
                     window.location.href = `/rooms`
-                })
             };
 
             connector.fetchTemplateWithoutBody('/rooms/quit/' + roomId,
@@ -187,8 +185,8 @@ const ROOM_APP = (() => {
             );
         };
 
-        const deleteRoom = (event) => {
-            const ifSucceed = (response) => {
+        const deleteRoom = () => {
+            const ifSucceed = () => {
                 alert('방을 삭제하였습니다!');
                 window.location.href = '/';
             };
@@ -212,7 +210,7 @@ const ROOM_APP = (() => {
             }
         };
 
-        const searchRoomByButton = (event) => {
+        const searchRoomByButton = () => {
             const searchKeyword = document.getElementById('search-keyword').value;
             window.location.href = `/search/${searchKeyword}`;
         };
