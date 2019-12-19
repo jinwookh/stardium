@@ -4,8 +4,6 @@ import com.bb.stardium.chat.dto.ChatMessageRequestDto;
 import com.bb.stardium.player.domain.Player;
 import com.bb.stardium.player.dto.PlayerRequestDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -136,8 +134,6 @@ public class ChatTest extends BaseAcceptanceTest {
         };
     }
 
-    @NoArgsConstructor
-    @Getter
     static private class TestChatResponseDto {
         private Long roomId;
         private String nickname;
@@ -145,5 +141,12 @@ public class ChatTest extends BaseAcceptanceTest {
         @JsonProperty("message")
         private String contents;
         private String timestamp;
+
+        public TestChatResponseDto() {
+        }
+
+        public String getContents() {
+            return contents;
+        }
     }
 }
