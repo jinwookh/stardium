@@ -70,43 +70,53 @@ const ROOM_APP = (() => {
         let roomId = document.getElementById('room-id');
         roomId = roomId ? roomId.value : 0;
 
-        const roomBasicInfoItemTitles = ['title', 'city', 'section', 'detail', 'gameDate', 'startTime'
+        const roomBasicInfoItemIds = ['title', 'city', 'section', 'detail', 'gameDate', 'startTime'
             , 'endTime', 'playersLimit', 'intro'];
 
+        function getBasicInfoItems(roomBasicInfoItemIds) {
+            let roomBasicInfoItems = new Map();
+            for (const id of roomBasicInfoItemIds) {
+                roomBasicInfoItems.set(id, document.getElementById(id).value);
+            }
+            return roomBasicInfoItems;
+        }
 
-        const title = document.getElementById('title');
-        const city = document.getElementById('city');
-        const section = document.getElementById('section');
-        const detail = document.getElementById('detail');
-        const gameDate = document.getElementById('gameDate');
-        const startTime = document.getElementById('startTime');
-        const endTime = document.getElementById('endTime');
-        const playersLimit = document.getElementById('playersLimit');
-        const intro = document.getElementById('intro');
+        function noneBlank(roomBasicInfoItems) {
+            for (const value of roomBasicInfoItems.values()) {
+                if (value === "") {
+                    return false;
+                }
+            }
+            return true;
+        }
 
+        function toRoomBasicInfo(roomBasicInfoItems) {
+            return {
+                title: roomBasicInfoItems.get('title'),
+                address: {
+                    city: roomBasicInfoItems.get('city'),
+                    section: roomBasicInfoItems.get('section'),
+                    detail: roomBasicInfoItems.get('detail'),
+                },
+                startTime: roomBasicInfoItems.get('gameDate') + ' ' + roomBasicInfoItems.get('startTime'),
+                endTime: roomBasicInfoItems.get('gameDate') + ' ' + roomBasicInfoItems.get('endTime'),
+                playersLimit: roomBasicInfoItems.get('playersLimit'),
+                intro: roomBasicInfoItems.get('intro'),
+            };
+        }
 
         const saveRoom = event => {
 
             event.preventDefault();
 
-            if (title.value === "" || city.value === "" || section.value === "" || detail.value === "" ||
-                startTime.value === "" || endTime.value === "" || playersLimit.value === "" && intro.value === "") {
+            const roomBasicInfoItems = getBasicInfoItems(roomBasicInfoItemIds);
+
+            if (noneBlank(roomBasicInfoItems) === false) {
                 alert('모든 항목을 입력해주세요!');
                 return;
             }
 
-            const roomBasicInfo = {
-                title: title.value,
-                address: {
-                    city: city.value,
-                    section: section.value,
-                    detail: detail.value,
-                },
-                startTime: gameDate.value + " " + startTime.value,
-                endTime: gameDate.value + " " + endTime.value,
-                playersLimit: playersLimit.value,
-                intro: intro.value,
-            };
+            const roomBasicInfo = toRoomBasicInfo(roomBasicInfoItems);
 
             const ifSucceed = (response) => {
                 response.json().then(data => {
@@ -125,24 +135,14 @@ const ROOM_APP = (() => {
         const updateRoom = event => {
             event.preventDefault();
 
-            if (title.value === "" || city.value === "" || section.value === "" || detail.value === "" ||
-                startTime.value === "" || endTime.value === "" || playersLimit.value === "" && intro.value === "") {
+            const roomBasicInfoItems = getBasicInfoItems(roomBasicInfoItemIds);
+
+            if (noneBlank(roomBasicInfoItems) === false) {
                 alert('모든 항목을 입력해주세요!');
                 return;
             }
 
-            const roomBasicInfo = {
-                title: title.value,
-                address: {
-                    city: city.value,
-                    section: section.value,
-                    detail: detail.value,
-                },
-                startTime: gameDate.value + " " + startTime.value,
-                endTime: gameDate.value + " " + endTime.value,
-                playersLimit: playersLimit.value,
-                intro: intro.value,
-            };
+            const roomBasicInfo = toRoomBasicInfo(roomBasicInfoItems);
 
             const ifSucceed = (response) => {
                 response.json().then(data => {
