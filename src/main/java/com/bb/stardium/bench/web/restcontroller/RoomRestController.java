@@ -1,6 +1,5 @@
 package com.bb.stardium.bench.web.restcontroller;
 
-
 import com.bb.stardium.bench.domain.Room;
 import com.bb.stardium.bench.dto.RoomRequestDto;
 import com.bb.stardium.bench.service.RoomService;

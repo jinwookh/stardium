@@ -25,9 +25,9 @@ const CHECK_SIGN_UP = (() => {
             const confirmPassword = document.querySelector("#password-confirm");
             const nickname = document.querySelector("#nickname");
 
-            if(event.target.tagName === "BUTTON") {
+            if (event.target.tagName === "BUTTON") {
                 const message = signUpModel.checkValue(email, password, confirmPassword, nickname);
-                if(message !== "") {
+                if (message !== "") {
                     alert(message);
                     return;
                 }

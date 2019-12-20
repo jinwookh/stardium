@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" layout:decorator="layout/main-layout"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/main-layout">
+      xmlns:th="http://www.thymeleaf.org">
 
 <th:block layout:fragment="custom-head">
     <title>게임 방</title>
@@ -30,7 +30,7 @@
                 <div class="ui segment">
                     <div class="chat-div" id="chat-box"></div>
                     <div class="ui input action fluid">
-                        <input type="text" id="chat-input"/>
+                        <input id="chat-input" type="text"/>
                         <button class="ui primary button active" id="chat-send-button">보내기</button>
                     </div>
                 </div>
@@ -58,13 +58,15 @@
 </th:block>
 
 <th:block layout:fragment="custom-js">
-    <script type="text/javascript" src="/js/fetch-api.js"></script>
-    <script type="text/javascript" src="/js/room.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"
-            integrity="sha256-z4cKT3yF+afIn8eFXJc+nRpGtwcmNEClvf+ikgsZcRo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
-            integrity="sha256-nkP8cj5xaTdWK/BsZl+57ZCE/Y/i4UNtbNTpgH+6Taw=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/js/chat.js"></script>
+    <script src="/js/fetch-api.js" type="text/javascript"></script>
+    <script src="/js/room.js" type="text/javascript"></script>
+    <script crossorigin="anonymous"
+            integrity="sha256-z4cKT3yF+afIn8eFXJc+nRpGtwcmNEClvf+ikgsZcRo="
+            src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha256-nkP8cj5xaTdWK/BsZl+57ZCE/Y/i4UNtbNTpgH+6Taw="
+            src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/chat.js" type="text/javascript"></script>
 </th:block>
 
 </html>

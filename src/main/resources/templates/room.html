@@ -34,8 +34,10 @@
             <div class="field">
                 <h3 class="ui dividing header">시간</h3>
                 <div class="ui segment center aligned">
-                    <p class="label" th:text="${'시작 시간 : ' + room.startTime.toString()}">일시</p>
-                    <p class="label" th:text="${'종료 시간 : ' + room.endTime.toString()}">시간</p>
+                    <p class="label" th:text="'시작 시간 : ' + ${#temporals.format(room.startTime, 'yyyy-MM-dd HH:mm')}">
+                        일시</p>
+                    <p class="label" th:text="'종료 시간 : ' + ${#temporals.format(room.endTime, 'yyyy-MM-dd HH:mm')}">
+                        시간</p>
                 </div>
             </div>
 
