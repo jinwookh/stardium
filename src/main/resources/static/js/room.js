@@ -125,6 +125,12 @@ const ROOM_APP = (() => {
         const updateRoom = event => {
             event.preventDefault();
 
+            if (title.value === "" || city.value === "" || section.value === "" || detail.value === "" ||
+                startTime.value === "" || endTime.value === "" || playersLimit.value === "" && intro.value === "") {
+                alert('모든 항목을 입력해주세요!');
+                return;
+            }
+
             const roomBasicInfo = {
                 title: title.value,
                 address: {
@@ -132,8 +138,8 @@ const ROOM_APP = (() => {
                     section: section.value,
                     detail: detail.value,
                 },
-                startTime: startTime.value,
-                endTime: endTime.value,
+                startTime: gameDate.value + " " + startTime.value,
+                endTime: gameDate.value + " " + endTime.value,
                 playersLimit: playersLimit.value,
                 intro: intro.value,
             };

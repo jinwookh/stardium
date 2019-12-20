@@ -64,12 +64,19 @@
             <div class="field">
                 <h4 class="ui dividing header">게임 시간</h4>
                 <div class="field">
+                    <label>날짜</label>
+                    <input id="gameDate" name="gameDate" th:value="${#temporals.format(room.endTime, 'yyyy-MM-dd')}"
+                           type="date">
+                </div>
+                <div class="field">
                     <label>시작 시간</label>
-                    <input id="startTime" name="startTime" th:value="${room.startTime}" type="datetime-local">
+                    <input id="startTime" name="startTime" th:value="${#temporals.format(room.endTime, 'HH:mm')}"
+                           type="time">
                 </div>
                 <div class="field">
                     <label>끝나는 시간</label>
-                    <input id="endTime" name="endTime" th:value="${room.endTime}" type="datetime-local">
+                    <input id="endTime" name="endTime" th:value="${#temporals.format(room.endTime, 'HH:mm')}"
+                           type="time">
                 </div>
             </div>
 
